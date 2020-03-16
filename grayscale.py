@@ -39,14 +39,14 @@ def toGray_BT601(im):
 
 
 def gamma_table(color, gamma=2.2, gain=1.0):    
-    return np.power(color, gain/gamma)
+    return np.power(color/255,gamma)*255
 
 def degamma_table(color, gamma=2.2, gain=1.0):
-    return np.power(color, gain/(gain/gamma))
+    return np.power(color/255, (gain/gamma))*255
 
 
 filename = 'lena.png'
-im = cv2.imread(filename).astype(np.float) # 配列に画像を読み込む
+im = cv2.imread(filename).astype(np.float)
 
 cie = toGray_CIE(im)
 bt601 = toGray_BT601(im)
